@@ -27,4 +27,12 @@ class Post extends Model
     public function votes(){
       return $this->hasMany('\App\Vote', 'post_id', 'id');
     }
+
+    public function comments(){
+      return $this->hasMany('\App\Comment', 'post_id', 'id');
+    }
+
+    public function video(){
+      return $this->hasOne('\App\Video', 'post_id','id');
+    }
 }

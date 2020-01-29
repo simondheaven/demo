@@ -38,4 +38,8 @@ class User extends Authenticatable
     public function doots(){
       return $this->hasMany('\App\Vote', 'user_id', 'id');
     }
+
+    public function comments(){
+      return $this->hasMany('\App\Comment', 'user_id', 'id');
+    }
 }

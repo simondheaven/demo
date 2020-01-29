@@ -4,12 +4,12 @@
 
 .post-even {
   background: silver;
-  min-height: 27vh;
+  min-height: 28vh;
 }
 
 .post-odd {
   background:white;
-  min-height: 27vh;
+  min-height: 28vh;
 }
 
 .post-user-image{
@@ -18,7 +18,7 @@
 }
 
 .timeline-inner{
-  max-height: 400px;
+  max-height: 80vh;
   overflow-y: auto;
   overflow-x: scroll;
 }
@@ -64,4 +64,44 @@
 .post-status-toolbox{
   z-index: 2000;
   position:relative;
+}
+
+.comments_panel_container{
+  -webkit-transition: all 1s ease-in;
+  -moz-transition: all 1s ease-in;
+  -ms-transition: all 1s ease-in;
+  -o-transition: all 1s ease-in;
+  transition: all 1s ease-in;
+  height: 1px;
+  margin-top: -1px;
+  opacity: 0;
+  overflow-y: auto;
+}
+
+.comments_panel_container_active{
+  -webkit-transition: all 1s ease-in;
+  -moz-transition: all 1s ease-in;
+  -ms-transition: all 1s ease-in;
+  -o-transition: all 1s ease-in;
+  transition: all 1s ease-in;
+  height: 350px;
+  opacity: 1;
+}
+
+.show_hide_comment_container{
+  -webkit-transition: all 0.5s ease-in;
+  -moz-transition: all 0.5s ease-in;
+  -ms-transition: all 0.5s ease-in;
+  -o-transition: all 0.5s ease-in;
+  transition: all 1s ease-in;
+  box-shadow: 0px 0px 0px black;
+}
+
+.show_hide_comment_container_active{
+  -webkit-transition: all 0.5s ease-in;
+  -moz-transition: all 0.5s ease-in;
+  -ms-transition: all 0.5s ease-in;
+  -o-transition: all 0.5s ease-in;
+  transition: all 1s ease-in;
+  box-shadow: 10px 10px 10px rgb(0,0,0,0.5);
 }

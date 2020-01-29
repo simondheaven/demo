@@ -40,6 +40,7 @@
       <p style="margin-top: -10px;"><small>Member since {{Carbon\Carbon::parse($user->created_at)->format('l d F Y')}}</small></p>
       <hr>
       <h6>Posts: {{$user->posts()->count()}}</h6>
+      <h6>Comments: {{$user->comments()->count()}}</h6>
       <h6>Updoots given: {{$user->doots()->where('value',1)->count()}}</h6>
       <h6>Downdoots given: {{$user->doots()->where('value',-1)->count()}}</h6>
       <hr>
@@ -94,35 +95,48 @@
 
   function drawChart2(){
     var data = google.visualization.arrayToDataTable([
-          ['Day', 'Posts', 'Upvotes', 'Downvotes'],
+          ['Day', 'Posts', 'Upvotes', 'Downvotes', 'Comments'],
           ['{{Carbon\Carbon::now()->addDays(-6)->format('l')}}',
             {{$user->posts()->where('created_at', '>', Carbon\Carbon::now()->addDays(-6)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-6)->endOfDay())->count()}},
             {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-6)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-6)->endOfDay())->where('value',1)->count()}},
-            {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-6)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-6)->endOfDay())->where('value',-1)->count()}}],
+            {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-6)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-6)->endOfDay())->where('value',-1)->count()}},
+            {{$user->comments()->where('created_at', '>', Carbon\Carbon::now()->addDays(-6)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-6)->endOfDay())->count()}}],
           ['{{Carbon\Carbon::now()->addDays(-5)->format('l')}}',
             {{$user->posts()->where('created_at', '>', Carbon\Carbon::now()->addDays(-5)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-5)->endOfDay())->count()}}
             ,{{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-5)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-5)->endOfDay())->where('value',1)->count()}},
-            {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-5)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-5)->endOfDay())->where('value',-1)->count()}}],
+            {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-5)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-5)->endOfDay())->where('value',-1)->count()}},
+            {{$user->comments()->where('created_at', '>', Carbon\Carbon::now()->addDays(-5)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-5)->endOfDay())->count()}}],
+
           ['{{Carbon\Carbon::now()->addDays(-4)->format('l')}}',
             {{$user->posts()->where('created_at', '>', Carbon\Carbon::now()->addDays(-4)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-4)->endOfDay())->count()}},
             {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-4)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-4)->endOfDay())->where('value',1)->count()}},
-            {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-4)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-4)->endOfDay())->where('value',-1)->count()}}],
+            {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-4)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-4)->endOfDay())->where('value',-1)->count()}},
+            {{$user->comments()->where('created_at', '>', Carbon\Carbon::now()->addDays(-4)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-4)->endOfDay())->count()}}],
+
           ['{{Carbon\Carbon::now()->addDays(-3)->format('l')}}',
             {{$user->posts()->where('created_at', '>', Carbon\Carbon::now()->addDays(-3)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-3)->endOfDay())->count()}},
             {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-3)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-3)->endOfDay())->where('value',1)->count()}},
-            {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-3)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-3)->endOfDay())->where('value',-1)->count()}}],
+            {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-3)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-3)->endOfDay())->where('value',-1)->count()}},
+            {{$user->comments()->where('created_at', '>', Carbon\Carbon::now()->addDays(-3)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-3)->endOfDay())->count()}}],
+
           ['{{Carbon\Carbon::now()->addDays(-2)->format('l')}}',
             {{$user->posts()->where('created_at', '>', Carbon\Carbon::now()->addDays(-2)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-2)->endOfDay())->count()}},
             {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-2)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-2)->endOfDay())->where('value',1)->count()}},
-            {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-2)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-2)->endOfDay())->where('value',-1)->count()}}],
+            {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-2)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-2)->endOfDay())->where('value',-1)->count()}},
+            {{$user->comments()->where('created_at', '>', Carbon\Carbon::now()->addDays(-2)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-2)->endOfDay())->count()}}],
+
           ['Yesterday',
             {{$user->posts()->where('created_at', '>', Carbon\Carbon::now()->addDays(-1)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-1)->endOfDay())->count()}},
             {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-1)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-1)->endOfDay())->where('value',1)->count()}},
-            {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-1)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-1)->endOfDay())->where('value',-1)->count()}}],
+            {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->addDays(-1)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-1)->endOfDay())->where('value',-1)->count()}},
+            {{$user->comments()->where('created_at', '>', Carbon\Carbon::now()->addDays(-1)->startOfDay())->where('created_at','<',Carbon\Carbon::now()->addDays(-1)->endOfDay())->count()}}],
+
           ['Today',
             {{$user->posts()->where('created_at', '>', Carbon\Carbon::now()->startOfDay())->count()}},
             {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->startOfDay())->where('value',1)->count()}},
-            {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->startOfDay())->where('value',-1)->count()}}],
+            {{$user->doots()->where('created_at', '>', Carbon\Carbon::now()->startOfDay())->where('value',-1)->count()}},
+            {{$user->comments()->where('created_at', '>', Carbon\Carbon::now()->startOfDay())->count()}}],
+
         ]);
 
         var options = {

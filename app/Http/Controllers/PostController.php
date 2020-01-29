@@ -38,8 +38,12 @@ class PostController extends Controller
       } else if($request->post_type == "VIDEO"){
         $post = Post::create([
           'user_id' => \Auth::user()->id,
-          'post_type' => $request->post_type
+          'post_type' => $request->post_type,
+          'text_content' => ($request->text_content == null) ? "" : $request->text_content
         ]);
+        $vc = new \App\Http\Controllers\VideoController();
+        $video = $vc->store($request,$post);
+        return redirect()->back()->with('video', $video);
       } else if($request->post_type == "LINK"){
         $post = Post::create([
           'user_id' => \Auth::user()->id,
@@ -55,7 +59,9 @@ class PostController extends Controller
       return Post::skip($request->loadedPosts)
                   ->orderBy('created_at','DESC')
                   ->take(20)
+                  ->with('comments.user.profilePic')
                   ->with('images')
+                  ->with('video')
                   ->with('votes')
                   ->with('user.profilePic')
                   ->get();
@@ -95,5 +101,14 @@ class PostController extends Controller
       $post->link_description = $request->link_description;
       $post->save();
       return $post;
+    }
+
+    public function addComment(Request $request){
+      $comment = \App\Comment::create([
+        'user_id' => \Auth::user()->id,
+        'content' => $request->content,
+        'post_id' => $request->post_id
+      ]);
+      return Post::where('id',$request->post_id)->with('comments.user.profilePic')->first();
     }
 }
